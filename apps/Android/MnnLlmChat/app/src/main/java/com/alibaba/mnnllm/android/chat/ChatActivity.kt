@@ -46,6 +46,7 @@ import com.alibaba.mnnllm.android.utils.PreferenceUtils
 import com.alibaba.mnnllm.api.openai.manager.ApiServiceManager
 import com.alibaba.mnnllm.android.chat.voice.VoiceChatFragment
 import com.alibaba.mnnllm.android.chat.voice.VoiceModelsChecker
+import com.alibaba.mnnllm.android.chat.lookie.LookieVideoFragment
 import com.alibaba.mnnllm.android.chat.voice.VoiceModelMarketBottomSheet
 import com.alibaba.mnnllm.android.modelist.ModelItemWrapper
 import com.alibaba.mnnllm.android.utils.CrashReportContext
@@ -513,6 +514,9 @@ class ChatActivity : AppCompatActivity() {
         menu.findItem(R.id.menu_item_benchmark_test).isVisible = benchmarkModule.enabled
         // Voice chat is only available for non-diffusion models
         menu.findItem(R.id.start_voice_chat).isVisible = !isDiffusion
+        // Lookie camera is only available for visual models
+        menu.findItem(R.id.start_lookie_camera).isVisible =
+            !isDiffusion && ModelTypeUtils.isVisualModel(modelId ?: "")
         // Real-time audio playback is only available for Omni models
         val isOmniModel = ModelTypeUtils.isOmni(modelName)
         menu.findItem(R.id.realtime_audio_playback).isVisible = false
@@ -525,6 +529,8 @@ class ChatActivity : AppCompatActivity() {
             handleNewSession()
         } else if (item.itemId == R.id.start_voice_chat) {
             handleVoiceChatClick()
+        } else if (item.itemId == R.id.start_lookie_camera) {
+            handleLookieCameraClick()
         } else if (item.itemId == R.id.show_performance_metrics) {
             item.setChecked(!item.isChecked)
             chatListComponent.toggleShowPerformanceMetrics(item.isChecked)
@@ -845,6 +851,18 @@ class ChatActivity : AppCompatActivity() {
         } catch (e: Exception) {
             Log.e(TAG, "Failed to initialize VoiceModelsChecker", e)
         }
+    }
+
+    private fun handleLookieCameraClick() {
+        if (isGenerating) {
+            Toast.makeText(this, getString(R.string.cannot_start_voice_chat_when_generating), Toast.LENGTH_SHORT).show()
+            return
+        }
+        val fragment = LookieVideoFragment.newInstance(modelName, modelId ?: "", chatPresenter)
+        supportFragmentManager.beginTransaction()
+            .replace(android.R.id.content, fragment)
+            .addToBackStack(LookieVideoFragment.TAG)
+            .commit()
     }
 
     private fun handleVoiceChatClick() {

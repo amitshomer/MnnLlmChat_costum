@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <!-- Toolbar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#44000000"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@android:color/transparent"
+            app:navigationIcon="@drawable/ic_close"
+            app:titleTextColor="#FFFFFF"
+            app:titleCentered="true"
+            app:titleTextAppearance="?textAppearanceTitleMedium"
+            tools:title="SmolVLM2" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Full-screen camera preview + overlays -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <!-- CameraX live feed -->
+        <androidx.camera.view.PreviewView
+            android:id="@+id/camera_preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- Shutter flash overlay -->
+        <View
+            android:id="@+id/shutter_flash"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFFFF"
+            android:alpha="0"
+            android:visibility="invisible" />
+
+        <!-- TTFT badge – top right -->
+        <TextView
+            android:id="@+id/tv_ttft_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:layout_margin="12dp"
+            android:background="#AA000000"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:fontFamily="monospace"
+            android:visibility="gone"
+            tools:text="TTFT 1.2s"
+            tools:visibility="visible" />
+
+        <!-- Dismissable response overlay – bottom of preview -->
+        <FrameLayout
+            android:id="@+id/response_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="160dp"
+            android:layout_marginHorizontal="12dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/tv_response"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#BB000000"
+                android:paddingStart="12dp"
+                android:paddingEnd="40dp"
+                android:paddingVertical="10dp"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:maxLines="6"
+                android:ellipsize="end"
+                tools:text="IMPROVE: Move the subject to the left third of the frame." />
+
+            <ImageButton
+                android:id="@+id/btn_dismiss_response"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="top|end"
+                android:layout_margin="4dp"
+                android:src="@drawable/ic_close"
+                android:background="@android:color/transparent"
+                android:contentDescription="Dismiss"
+                app:tint="#FFFFFF" />
+        </FrameLayout>
+
+        <!-- Bottom control bar -->
+        <LinearLayout
+            android:id="@+id/bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:background="#88000000"
+            android:paddingBottom="16dp"
+            android:paddingTop="8dp">
+
+            <!-- Row 1: zoom buttons (center) + AI-Tips button (right) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="12dp"
+                android:paddingBottom="8dp">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <!-- Zoom buttons -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/btn_zoom_1"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:text="1x"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"
+                        android:alpha="1.0"
+                        android:padding="0dp"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp" />
+
+                    <Button
+                        android:id="@+id/btn_zoom_2"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:text="2x"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"
+                        android:alpha="0.5"
+                        android:padding="0dp"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp" />
+
+                    <Button
+                        android:id="@+id/btn_zoom_3"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:text="3x"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"
+                        android:alpha="0.5"
+                        android:padding="0dp"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end">
+
+                    <!-- AI-Tips / Stop button -->
+                    <Button
+                        android:id="@+id/btn_ai_tips"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_gravity="end"
+                        android:text="@string/lookie_ai_tips_button"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:background="@drawable/bg_button_outline"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="0dp"
+                        android:minHeight="0dp" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <!-- Row 2: gallery | capture | flip -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:paddingHorizontal="24dp">
+
+                <!-- Gallery thumbnail -->
+                <ImageButton
+                    android:id="@+id/btn_gallery"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:src="@drawable/ic_camera_on"
+                    android:background="@drawable/bg_mute_circle"
+                    android:padding="12dp"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Gallery"
+                    android:layout_marginEnd="0dp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <!-- Large capture button -->
+                <ImageButton
+                    android:id="@+id/btn_capture"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:src="@drawable/ic_camera_on"
+                    android:background="@drawable/bg_circle_white"
+                    android:padding="18dp"
+                    android:contentDescription="Capture" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <!-- Flip lens -->
+                <ImageButton
+                    android:id="@+id/btn_flip"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:src="@drawable/ic_camera_switch"
+                    android:background="@drawable/bg_mute_circle"
+                    android:padding="12dp"
+                    android:contentDescription="Flip camera" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

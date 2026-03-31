@@ -11,6 +11,12 @@
         android:iconTint="@color/color_foreground"
         app:showAsAction="ifRoom" />
     <item
+        android:id="@+id/start_lookie_camera"
+        android:title="@string/start_lookie_camera"
+        android:icon="@drawable/ic_camera_on"
+        android:iconTint="@color/color_foreground"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/show_performance_metrics"
         android:title="@string/show_performance_metrics"
         app:showAsAction="never"

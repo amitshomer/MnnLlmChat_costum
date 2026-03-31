@@ -237,6 +237,8 @@ class LookieVideoFragment : Fragment(), ChatPresenter.GenerateListener {
                     activity?.runOnUiThread {
                         binding.btnGallery.setImageURI(galleryUri)
                         flashShutter()
+                        // Reset KV-cache so each press is a fresh single-turn call (prevents TTFT growing)
+                        chatPresenter.getLlmSession()?.reset()
                         setInferencing(true)
                     }
 

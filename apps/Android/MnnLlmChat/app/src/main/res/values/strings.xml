@@ -274,6 +274,7 @@
     <string name="lookie_ttft_elapsed">⏱ %.1fs</string>
     <string name="lookie_ttft_final">TTFT %.1fs</string>
     <string name="lookie_no_photos">No photos captured yet</string>
+    <string name="lookie_warming_up">Warming up…</string>
     <string name="max_new_tokens">Max New Tokens</string>
     <string name="system_prompt">System Prompt</string>
     

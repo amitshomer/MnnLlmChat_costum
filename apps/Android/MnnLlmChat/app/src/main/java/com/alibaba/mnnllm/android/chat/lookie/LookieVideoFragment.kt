@@ -129,6 +129,7 @@ class LookieVideoFragment : Fragment(), ChatPresenter.GenerateListener {
         binding.toolbar.setNavigationOnClickListener { activity?.supportFragmentManager?.popBackStack() }
         setupClickListeners()
         checkAndRequestCameraPermission()
+        warmupGpu()
     }
 
     private fun setupClickListeners() {
@@ -263,6 +264,40 @@ class LookieVideoFragment : Fragment(), ChatPresenter.GenerateListener {
         val outputDir = File(requireContext().cacheDir, "lookie").also { it.mkdirs() }
         val name = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.US).format(System.currentTimeMillis())
         return File(outputDir, "$name.jpg")
+    }
+
+    private fun warmupGpu() {
+        binding.btnAiTips.isEnabled = false
+        binding.btnAiTips.text = getString(R.string.lookie_warming_up)
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                // Create a tiny 8×8 white JPEG as the dummy image
+                val dummy = File(requireContext().cacheDir, "lookie_warmup.jpg")
+                if (!dummy.exists()) {
+                    val bmp = android.graphics.Bitmap.createBitmap(8, 8, android.graphics.Bitmap.Config.ARGB_8888)
+                    bmp.eraseColor(android.graphics.Color.WHITE)
+                    dummy.outputStream().use { bmp.compress(android.graphics.Bitmap.CompressFormat.JPEG, 80, it) }
+                    bmp.recycle()
+                }
+                val session = chatPresenter.getLlmSession()
+                if (session != null) {
+                    session.reset()
+                    session.generate("<img>${dummy.absolutePath}</img>hi", mapOf(), object : com.alibaba.mnnllm.android.llm.GenerateProgressListener {
+                        override fun onProgress(progress: String?): Boolean = true // stop immediately after first token
+                    })
+                    session.reset() // clear warm-up from context
+                }
+            } catch (e: Exception) {
+                Log.w(TAG, "GPU warm-up failed (non-fatal)", e)
+            } finally {
+                withContext(Dispatchers.Main) {
+                    if (_binding != null) {
+                        binding.btnAiTips.isEnabled = true
+                        binding.btnAiTips.text = getString(R.string.lookie_ai_tips_button)
+                    }
+                }
+            }
+        }
     }
 
     private fun setInferencing(inferencing: Boolean) {

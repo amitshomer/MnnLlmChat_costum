@@ -16,6 +16,7 @@ import android.widget.ImageView
 import com.alibaba.mnnllm.android.R
 import com.alibaba.mnnllm.android.chat.ChatActivity
 import com.alibaba.mnnllm.android.chat.DEFAULT_SANA_PROMPT
+import com.alibaba.mnnllm.android.chat.DEFAULT_VISUAL_PROMPT
 import com.alibaba.mnnllm.android.chat.input.AttachmentPickerModule.AttachmentType
 import com.alibaba.mnnllm.android.chat.input.AttachmentPickerModule.ImagePickCallback
 import com.alibaba.mnnllm.android.chat.ChatActivity.Companion.TAG
@@ -97,7 +98,8 @@ class ChatInputComponent(
         editUserMessage.setText(
             resolveInputTextForModel(
                 editUserMessage.text?.toString().orEmpty(),
-                ModelTypeUtils.requiresFaceImageInput(currentModelId)
+                ModelTypeUtils.requiresFaceImageInput(currentModelId),
+                ModelTypeUtils.isVisualModel(currentModelId)
             )
         )
     }
@@ -180,7 +182,8 @@ class ChatInputComponent(
         editUserMessage.setText(
             resolveInputTextForModel(
                 editUserMessage.text?.toString().orEmpty(),
-                ModelTypeUtils.requiresFaceImageInput(currentModelId)
+                ModelTypeUtils.requiresFaceImageInput(currentModelId),
+                ModelTypeUtils.isVisualModel(currentModelId)
             )
         )
         editUserMessage.addTextChangedListener(object : TextWatcher {
@@ -413,10 +416,12 @@ class ChatInputComponent(
 
         internal fun resolveInputTextForModel(
             inputText: String,
-            requiresFaceImage: Boolean
+            requiresFaceImage: Boolean,
+            isVisualModel: Boolean = false
         ): String {
-            if (!requiresFaceImage) return inputText
-            return if (inputText.isBlank()) DEFAULT_SANA_PROMPT else inputText
+            if (requiresFaceImage) return if (inputText.isBlank()) DEFAULT_SANA_PROMPT else inputText
+            if (isVisualModel) return if (inputText.isBlank()) DEFAULT_VISUAL_PROMPT else inputText
+            return inputText
         }
     }
 

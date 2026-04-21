@@ -228,8 +228,21 @@ bool LlmSession::Load() {
         last_load_error_ = "Module load failed for config: " + model_path_ +
             ". Common causes: model file (.mnn) missing or corrupted, wrong backend (e.g. NPU on CPU-only device), insufficient memory.";
         MNN_DEBUG("Model load() returned false: %s", last_load_error_.c_str());
+    } else {
+        std::string backend = config.value("backend_type", "cpu");
+        if (backend == "opencl" || backend == "vulkan") {
+            MNN_DEBUG("GPU backend detected (%s), tuning OpenCL kernels...", backend.c_str());
+            llm_->tuning(MNN::Transformer::OP_ENCODER_NUMBER, {1, 5, 10, 20, 50, 100});
+            MNN_DEBUG("Kernel tuning done.");
+        }
     }
     return model_loaded_;
+}
+
+bool LlmSession::SetPrefixCache(const std::string& cacheDir, const std::string& filename) {
+    if (!llm_) return false;
+    llm_->set_config("{\"prefix_cache_path\":\"" + cacheDir + "\"}");
+    return llm_->setPrefixCacheFile(filename);
 }
 
 LlmSession::~LlmSession() {

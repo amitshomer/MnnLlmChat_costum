@@ -43,7 +43,21 @@ object ModelTypeUtils {
 
     fun isVisualModel(modelId: String): Boolean {
         return modelId.lowercase(Locale.getDefault()).contains("vl") || isOmni(modelId) ||
-                ModelListManager.isVisualModel(modelId) || isSanaModel(modelId)
+                ModelListManager.isVisualModel(modelId) || isSanaModel(modelId) ||
+                isLocalVisualModel(modelId)
+    }
+
+    private fun isLocalVisualModel(modelId: String): Boolean {
+        if (!modelId.startsWith("local/")) return false
+        val modelPath = modelId.removePrefix("local/")
+        val llmConfigFile = java.io.File("$modelPath/llm_config.json")
+        if (!llmConfigFile.exists()) return false
+        return try {
+            val json = org.json.JSONObject(llmConfigFile.readText())
+            json.optBoolean("is_visual", false)
+        } catch (e: Exception) {
+            false
+        }
     }
 
     fun isVideoModel(modelId: String): Boolean {

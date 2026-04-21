@@ -21,6 +21,7 @@ import com.alibaba.mnnllm.android.R
 import com.alibaba.mnnllm.android.chat.ChatActivity
 import com.alibaba.mnnllm.android.utils.FileUtils
 import com.alibaba.mnnllm.android.model.ModelTypeUtils
+import com.alibaba.mnnllm.android.widgets.FullScreenImageViewer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -75,6 +76,14 @@ class AttachmentPickerModule(private val activity: ChatActivity) {
         imagePreviewDelete = activity.findViewById(R.id.image_preview_delete)
         selectAttachmentLayoutParent = activity.findViewById(R.id.layout_more_menu)
         imagePreviewDelete.setOnClickListener { v: View? -> deletePreviewImage() }
+        imagePreviewLayout.setOnClickListener {
+            val images = imagePreviewAdapter.getImages()
+            if (images.isNotEmpty()) {
+                FullScreenImageViewer.showImagePopup(activity, images, images.size - 1, false)
+            } else {
+                chooseImageView()
+            }
+        }
 
         imagePreviewAdapter = ImagePreviewAdapter { uri ->
             imagePreviewAdapter.removeImage(uri)
@@ -102,7 +111,7 @@ class AttachmentPickerModule(private val activity: ChatActivity) {
     }
 
     private fun hidePreview() {
-        imagePreviewLayout.visibility = View.GONE
+        attachmentPreview.setImageResource(R.drawable.ic_image)
         imagePreviewRecycler.visibility = View.GONE
         imagePreviewDelete.visibility = View.GONE
         if (callback != null) {
@@ -358,12 +367,15 @@ class AttachmentPickerModule(private val activity: ChatActivity) {
     }
 
     private fun showImagePreview() {
+        val images = imagePreviewAdapter.getImages()
+        if (images.isNotEmpty()) {
+            attachmentPreview.setImageURI(images.last())
+        }
         imagePreviewRecycler.visibility = View.VISIBLE
-        imagePreviewLayout.visibility = View.GONE
         imagePreviewDelete.visibility = View.GONE
         hideAttachmentLayout()
         if (callback != null) {
-            callback!!.onAttachmentPicked(imagePreviewAdapter.getImages(), AttachmentType.Image)
+            callback!!.onAttachmentPicked(images, AttachmentType.Image)
         }
         imageUri = null
     }

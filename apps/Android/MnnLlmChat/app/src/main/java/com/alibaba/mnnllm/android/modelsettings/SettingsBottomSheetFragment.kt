@@ -67,10 +67,16 @@ class SettingsBottomSheetFragment : BaseSettingsBottomSheetFragment() {
 
     override fun refreshUIFromConfig() {
         updateSamplerSettings()
+        updateSamplerSettingsVisibility()
         currentConfig.maxNewTokens = currentConfig.maxNewTokens ?: defaultConfig.maxNewTokens
         binding.editMaxNewTokens.setText(currentConfig.maxNewTokens.toString())
         currentConfig.systemPrompt = currentConfig.systemPrompt ?: defaultConfig.systemPrompt
         binding.editTextSystemPrompt.setText(currentConfig.systemPrompt)
+        binding.dropdownPrecision.setCurrentItem(currentConfig.precision ?: defaultConfig.precision!!)
+        binding.etThreadNum.setText((currentConfig.threadNum ?: defaultConfig.threadNum!!).toString())
+        val backendOptions = listOf("cpu", "opencl")
+        val backend = currentConfig.backendType?.takeIf { it in backendOptions } ?: "cpu"
+        binding.dropdownBackend.setCurrentItem(backend)
     }
 
     override fun setupUI() {
@@ -563,12 +569,7 @@ class SettingsBottomSheetFragment : BaseSettingsBottomSheetFragment() {
 
     override fun onAfterSettingsReset() {
         super.onAfterSettingsReset()
-        currentConfig.systemPrompt = currentConfig.systemPrompt ?: defaultConfig.systemPrompt
-        binding.editTextSystemPrompt.setText(currentConfig.systemPrompt)
-        currentConfig.maxNewTokens = currentConfig.maxNewTokens ?: defaultConfig.maxNewTokens
-        binding.editMaxNewTokens.setText(currentConfig.maxNewTokens.toString())
-        updateSamplerSettings()
-        updateSamplerSettingsVisibility()
+        refreshUIFromConfig()
         chatSession?.updateSystemPrompt(currentConfig.systemPrompt ?: defaultConfig.systemPrompt ?: "")
         chatSession?.updateMaxNewTokens(currentConfig.maxNewTokens ?: defaultConfig.maxNewTokens ?: 2048)
     }

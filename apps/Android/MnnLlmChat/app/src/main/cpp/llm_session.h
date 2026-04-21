@@ -60,6 +60,9 @@ public:
 
     // Add getter method for underlying Llm object for benchmarking purposes
     Llm* getLlm() const { return llm_; }
+
+    // Set prefix cache directory and filename; returns true if cache files already exist on disk
+    bool SetPrefixCache(const std::string& cacheDir, const std::string& filename);
     
     // Platform-independent benchmark result structure
     struct BenchmarkResult {

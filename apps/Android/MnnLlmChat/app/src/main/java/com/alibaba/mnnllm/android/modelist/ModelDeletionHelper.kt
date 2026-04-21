@@ -8,6 +8,7 @@ import com.alibaba.mnnllm.android.chat.model.ChatDataManager
 import com.alibaba.mnnllm.android.history.HistoryUtils
 import com.alibaba.mnnllm.android.modelsettings.ModelConfig
 import com.alibaba.mnnllm.android.utils.MmapUtils
+import com.alibaba.mnnllm.android.utils.PreferenceUtils
 import java.io.File
 
 /** Subdirs under tmps/<base> used by MmapUtils.getMmapDir() for ModelScope/Modelers; keep in sync with MmapUtils. */
@@ -188,10 +189,18 @@ object ModelDeletionHelper {
             false
         }
 
-        // 3. Delete the model files via ModelDownloadManager
+        // 3. Delete the model files
         val modelDeleted = try {
-            ModelDownloadManager.getInstance(context).deleteModel(modelId)
-            true
+            if (modelId.startsWith("local/")) {
+                // Mark as hidden so rescan skips it even if file deletion is denied by OS
+                PreferenceUtils.hideLocalModel(context, modelId)
+                val modelPath = modelId.removePrefix("local/")
+                File(modelPath).deleteRecursively()
+                true
+            } else {
+                ModelDownloadManager.getInstance(context).deleteModel(modelId)
+                true
+            }
         } catch (e: Exception) {
             errors.add("Failed to delete model: ${e.message}")
             false

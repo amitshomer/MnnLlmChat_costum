@@ -19,6 +19,9 @@ object PreferenceUtils {
     // Pinned models management
     const val KEY_PINNED_MODELS: String = "PINNED_MODELS"
 
+    // Hidden local models (removed from list but files may still exist on disk)
+    const val KEY_HIDDEN_LOCAL_MODELS: String = "HIDDEN_LOCAL_MODELS"
+
     // Timber logging configuration
     const val KEY_TIMBER_LOGGING_ENABLED: String = "TIMBER_LOGGING_ENABLED"
 
@@ -114,5 +117,22 @@ object PreferenceUtils {
 
     fun isModelPinned(context: Context?, modelId: String): Boolean {
         return getPinnedModels(context).contains(modelId)
+    }
+
+    fun getHiddenLocalModels(context: Context?): Set<String> {
+        val raw = getString(context, KEY_HIDDEN_LOCAL_MODELS, "")
+        return if (raw.isNullOrEmpty()) emptySet() else raw.split(",").toSet()
+    }
+
+    fun hideLocalModel(context: Context?, modelId: String) {
+        val hidden = getHiddenLocalModels(context).toMutableSet()
+        hidden.add(modelId)
+        setString(context, KEY_HIDDEN_LOCAL_MODELS, hidden.joinToString(","))
+    }
+
+    fun unhideLocalModel(context: Context?, modelId: String) {
+        val hidden = getHiddenLocalModels(context).toMutableSet()
+        hidden.remove(modelId)
+        setString(context, KEY_HIDDEN_LOCAL_MODELS, hidden.joinToString(","))
     }
 }

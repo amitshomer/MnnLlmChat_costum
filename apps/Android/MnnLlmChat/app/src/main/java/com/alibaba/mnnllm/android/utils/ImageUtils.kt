@@ -215,4 +215,26 @@ object ImageUtils {
             Log.e(TAG, "Failed to compress image due to exception", e)
         }
     }
+
+    fun padToSquareInPlace(file: java.io.File, padColor: Int = android.graphics.Color.rgb(127, 127, 127), quality: Int = 85) {
+        try {
+            val bitmap = android.graphics.BitmapFactory.decodeFile(file.absolutePath) ?: return
+            if (bitmap.width == bitmap.height) {
+                bitmap.recycle()
+                return
+            }
+            val size = maxOf(bitmap.width, bitmap.height)
+            val padded = android.graphics.Bitmap.createBitmap(size, size, android.graphics.Bitmap.Config.ARGB_8888)
+            val canvas = android.graphics.Canvas(padded)
+            canvas.drawColor(padColor)
+            canvas.drawBitmap(bitmap, 0f, 0f, null)
+            bitmap.recycle()
+            java.io.FileOutputStream(file).use { out ->
+                padded.compress(android.graphics.Bitmap.CompressFormat.JPEG, quality, out)
+            }
+            padded.recycle()
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to pad image to square", e)
+        }
+    }
 }

@@ -28,6 +28,8 @@ import com.alibaba.mnnllm.android.utils.FileUtils
 import com.alibaba.mnnllm.android.utils.BaseBottomSheetDialogFragment
 import java.io.File
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.alibaba.mnnllm.android.modelsettings.ModelConfig
+import kotlinx.coroutines.launch
 
 class BenchmarkFragment : Fragment(), BenchmarkContract.View {
 
@@ -58,6 +60,7 @@ class BenchmarkFragment : Fragment(), BenchmarkContract.View {
         presenter = BenchmarkPresenter(requireContext(), this, lifecycleScope)
         
         setupClickListeners()
+        setupVisionTestClickListener()
         presenter?.onCreate()
     }
 
@@ -644,6 +647,115 @@ class BenchmarkFragment : Fragment(), BenchmarkContract.View {
         return ""
     }
 
+    // ===== Vision Accuracy Test =====
+
+    private var visionService: VisionAccuracyService? = null
+    private var visionTestRunning = false
+
+    private fun setupVisionTestClickListener() {
+        _binding?.visionTestButtonContainer?.setOnClickListener {
+            if (visionTestRunning) stopVisionTest() else startVisionTest()
+        }
+        _binding?.visionQuickTestButtonContainer?.setOnClickListener {
+            if (visionTestRunning) stopVisionTest() else startVisionTest(limit = 10)
+        }
+    }
+
+    private fun getTestsetDir(): String {
+        val externalFiles = requireContext().getExternalFilesDir(null)
+        return java.io.File(externalFiles, VisionAccuracyService.TESTSET_SUBDIR).absolutePath
+    }
+
+    private fun startVisionTest(limit: Int = Int.MAX_VALUE) {
+        val modelWrapper = selectedModelWrapper ?: run {
+            showToast(getString(R.string.vision_test_no_model))
+            return
+        }
+
+        val testsetDir = getTestsetDir()
+        val labelsFile = java.io.File(testsetDir, VisionAccuracyService.LABELS_FILENAME)
+        if (!labelsFile.exists()) {
+            showToast(getString(R.string.vision_test_no_testset))
+            Log.e(TAG, "Testset labels not found at: ${labelsFile.absolutePath}")
+            return
+        }
+
+        val modelId = modelWrapper.modelItem.modelId ?: return
+        val configPath = ModelConfig.getDefaultConfigFile(modelId)
+        val backendType = getSelectedBackend()
+
+        visionService = VisionAccuracyService()
+        visionTestRunning = true
+        _binding?.root?.keepScreenOn = true
+        setVisionTestRunningUI(true)
+        _binding?.visionTestResultsSection?.visibility = View.GONE
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            val result = visionService?.runTest(
+                modelId = modelId,
+                configPath = configPath,
+                backendType = backendType,
+                testsetDir = testsetDir,
+                limit = limit,
+                onProgress = { current, total, filename ->
+                    if (_binding == null) return@runTest
+                    val pct = (current * 100f / total).toInt()
+                    _binding?.visionTestProgressBar?.progress = pct
+                    _binding?.visionTestProgressText?.text =
+                        getString(R.string.vision_test_running, current, total)
+                }
+            )
+
+            visionTestRunning = false
+            _binding?.root?.keepScreenOn = false
+            setVisionTestRunningUI(false)
+
+            if (result != null) {
+                showVisionTestResults(result.stats)
+                result.outputFile?.let { path ->
+                    showToast("Results saved to: $path")
+                }
+            } else {
+                showToast(getString(R.string.vision_test_failed))
+            }
+        }
+    }
+
+    private fun stopVisionTest() {
+        visionService?.stop()
+    }
+
+    private fun setVisionTestRunningUI(running: Boolean) {
+        _binding?.visionTestButtonText?.text =
+            getString(if (running) R.string.stop_vision_test else R.string.start_vision_test)
+        _binding?.visionTestIcon?.visibility = if (running) View.GONE else View.VISIBLE
+        _binding?.visionTestButtonProgress?.visibility = if (running) View.VISIBLE else View.GONE
+        _binding?.visionTestProgressSection?.visibility = if (running) View.VISIBLE else View.GONE
+        // Disable the quick-test button while running (and re-enable when done)
+        _binding?.visionQuickTestButtonContainer?.isEnabled = !running
+        _binding?.visionQuickTestButtonContainer?.alpha = if (running) 0.4f else 1f
+        if (running) {
+            _binding?.visionTestProgressBar?.progress = 0
+            _binding?.visionTestProgressText?.text = getString(R.string.vision_test_loading)
+        }
+    }
+
+    private fun showVisionTestResults(stats: VisionAccuracyService.AccuracyStats) {
+        _binding?.visionTestResultsSection?.visibility = View.VISIBLE
+        _binding?.visionOverallAccuracy?.text = getString(
+            R.string.vision_overall_accuracy,
+            stats.correct, stats.total, stats.accuracy * 100f
+        )
+        _binding?.visionCaptureAccuracy?.text = getString(
+            R.string.vision_capture_accuracy,
+            stats.captureCorrect, stats.captureTotal, stats.captureAccuracy * 100f
+        )
+        _binding?.visionImproveAccuracy?.text = getString(
+            R.string.vision_improve_accuracy,
+            stats.improveCorrect, stats.improveTotal, stats.improveAccuracy * 100f
+        )
+    }
+
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
         if (!hidden) {
@@ -653,6 +765,8 @@ class BenchmarkFragment : Fragment(), BenchmarkContract.View {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        visionService?.stop()
+        _binding?.root?.keepScreenOn = false
         _binding = null
     }
     

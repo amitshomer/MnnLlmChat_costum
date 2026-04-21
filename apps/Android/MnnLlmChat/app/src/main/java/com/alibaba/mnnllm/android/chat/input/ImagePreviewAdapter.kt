@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.mnnllm.android.R
+import com.alibaba.mnnllm.android.widgets.FullScreenImageViewer
 
 class ImagePreviewAdapter(
     private val onDeleteClick: (Uri) -> Unit
@@ -53,7 +54,7 @@ class ImagePreviewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(images[position])
+        holder.bind(images[position], position)
     }
 
     override fun getItemCount(): Int = images.size
@@ -62,7 +63,7 @@ class ImagePreviewAdapter(
         private val imageView: ImageView = itemView.findViewById(R.id.iv_preview)
         private val deleteView: View? = itemView.findViewById(R.id.iv_delete)
 
-        fun bind(uri: Uri) {
+        fun bind(uri: Uri, position: Int) {
             try {
                 imageView.setImageURI(uri)
             } catch (e: Exception) {
@@ -72,12 +73,8 @@ class ImagePreviewAdapter(
             deleteView?.setOnClickListener {
                 onDeleteClick(uri)
             }
-            // Also allow clicking the image to delete if no explicit delete button found?
-            // Or maybe just show it.
-            if (deleteView == null) {
-                itemView.setOnClickListener {
-                    onDeleteClick(uri)
-                }
+            imageView.setOnClickListener {
+                FullScreenImageViewer.showImagePopup(itemView.context, images, position, false)
             }
         }
     }

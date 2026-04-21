@@ -732,8 +732,10 @@ object ModelListManager {
             val downloadedModels = mutableListOf<ChatDataManager.DownloadedModelInfo>()
             val pinnedModels = PreferenceUtils.getPinnedModels(context)
 
-             // Add local models from LocalModelsProvider
+             // Add local models from LocalModelsProvider, skipping user-hidden ones
+             val hiddenLocalModels = PreferenceUtils.getHiddenLocalModels(context)
              val localModels = LocalModelsProvider.getLocalModels()
+                 .filter { it.modelId !in hiddenLocalModels }
              localModels.forEach { localModel ->
                  if (localModel.modelId != null && localModel.localPath != null) {
                      try {

@@ -748,4 +748,17 @@ Java_com_alibaba_mnnllm_android_llm_LlmSession_runBenchmarkNative(
     return env->NewObject(resultClass, resultCtor, testInstance, (jboolean)result.success, errorMessage);
 }
 
+JNIEXPORT jboolean JNICALL
+Java_com_alibaba_mnnllm_android_llm_LlmSession_setPrefixCacheNative(
+        JNIEnv* env, jobject, jlong instanceId, jstring cacheDir, jstring filename) {
+    auto* session = reinterpret_cast<mls::LlmSession*>(instanceId);
+    if (!session) return JNI_FALSE;
+    const char* dir = env->GetStringUTFChars(cacheDir, nullptr);
+    const char* name = env->GetStringUTFChars(filename, nullptr);
+    bool result = session->SetPrefixCache(std::string(dir), std::string(name));
+    env->ReleaseStringUTFChars(cacheDir, dir);
+    env->ReleaseStringUTFChars(filename, name);
+    return result ? JNI_TRUE : JNI_FALSE;
+}
+
 } // extern "C"

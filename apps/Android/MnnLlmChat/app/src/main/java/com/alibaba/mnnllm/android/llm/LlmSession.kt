@@ -304,6 +304,11 @@ class LlmSession (
 
     private external fun updateConfigNative(llmPtr: Long, configJson: String)
 
+    private external fun setPrefixCacheNative(ptr: Long, cacheDir: String, filename: String): Boolean
+
+    fun setPrefixCache(cacheDir: String, filename: String): Boolean =
+        if (nativePtr != 0L) setPrefixCacheNative(nativePtr, cacheDir, filename) else false
+
 
     companion object {
         const val TAG: String = "LlmSession"

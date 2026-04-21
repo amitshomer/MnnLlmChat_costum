@@ -49,7 +49,7 @@ class LlmModel(PreTrainedModel):
             'qwen2_vl': 'Qwen2VLForConditionalGeneration',
             'qwen2_audio': 'Qwen2AudioForConditionalGeneration',
             'smolvlm': 'AutoModelForImageTextToText',
-            'idefics3': 'AutoModelForVision2Seq',
+            'idefics3': 'AutoModelForImageTextToText',
             'funaudiochat': 'AutoModelForSeq2SeqLM',
             'glm_ocr': 'GlmOcrForConditionalGeneration',
             'lfm2_vl': 'Lfm2VlForConditionalGeneration',

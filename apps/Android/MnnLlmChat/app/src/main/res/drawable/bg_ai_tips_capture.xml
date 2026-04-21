@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Glow container background applied to responseOverlay for CAPTURE result.
+  tvResponse keeps its dark bg_ai_tips_response; this sits behind it with ~6dp padding.
+  All layers use positive insets so they stay within view bounds → corners always round.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Outermost diffuse glow ring -->
+    <item>
+        <shape>
+            <stroke android:width="6dp" android:color="#2200E676" />
+            <solid android:color="#CC000000" />
+            <corners android:radius="20dp" />
+        </shape>
+    </item>
+
+    <!-- Mid glow ring -->
+    <item android:left="3dp" android:top="3dp" android:right="3dp" android:bottom="3dp">
+        <shape>
+            <stroke android:width="3dp" android:color="#4400E676" />
+            <solid android:color="@android:color/transparent" />
+            <corners android:radius="17dp" />
+        </shape>
+    </item>
+
+    <!-- Inner sharp border -->
+    <item android:left="5dp" android:top="5dp" android:right="5dp" android:bottom="5dp">
+        <shape>
+            <stroke android:width="1dp" android:color="#BB00E676" />
+            <solid android:color="@android:color/transparent" />
+            <corners android:radius="15dp" />
+        </shape>
+    </item>
+
+</layer-list>

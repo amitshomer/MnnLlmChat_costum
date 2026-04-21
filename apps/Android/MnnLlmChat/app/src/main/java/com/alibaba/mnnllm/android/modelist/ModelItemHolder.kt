@@ -232,8 +232,9 @@ class ModelItemHolder(
         // 1. Must be a downloaded model (has download info) -> This excludes manually added local models
         // 2. Must NOT be a builtin model -> This excludes builtin models
         val isDownloaded = modelWrapper.downloadedModelInfo != null
+        val isLocalPushed = modelItem.modelId?.startsWith("local/") == true
         val isBuiltin = modelItem.isBuiltin || modelItem.modelId?.startsWith("Builtin/") == true
-        val isDeletable = isDownloaded && !isBuiltin
+        val isDeletable = (isDownloaded || isLocalPushed) && !isBuiltin
 
         // Delete, settings, and model info are always available
         popupMenu.menu.findItem(R.id.menu_delete_model).setVisible(isDeletable)

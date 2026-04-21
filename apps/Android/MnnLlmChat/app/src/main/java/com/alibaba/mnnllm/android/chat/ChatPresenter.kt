@@ -282,8 +282,22 @@ class ChatPresenter(
     }
 
 
+    private fun preprocessImages(userData: ChatDataItem) {
+        if (userData.imageUris.isNullOrEmpty()) return
+        if (ModelTypeUtils.isDiffusionModel(this.modelName)) return
+        if (!ModelTypeUtils.isVisualModel(this.modelId)) return
+        for (uri in userData.imageUris!!) {
+            val path = FileUtils.getPathForUri(uri) ?: continue
+            val file = java.io.File(path)
+            if (!file.exists()) continue
+            com.alibaba.mnnllm.android.utils.ImageUtils.compressImageFile(file, maxDimension = 1024)
+            com.alibaba.mnnllm.android.utils.ImageUtils.padToSquareInPlace(file)
+        }
+    }
+
     suspend fun requestGenerate(userData: ChatDataItem, generateListener: GenerateListener): HashMap<String, Any> {
         this.generateListener = generateListener
+        preprocessImages(userData)
         val prompt = PromptUtils.generateUserPrompt(userData)
         
         // Ensure user input is saved first
@@ -293,10 +307,10 @@ class ChatPresenter(
                 updateSession(sessionId!!, modelId, sessionName!!)
             }
             
-            // Always save user input to database first
+            // Save user input concurrently — inference takes seconds so DB write completes well before response
             Log.d(TAG, "requestGenerate: saving user input for sessionId=$sessionId")
-            chatDataManager!!.addChatData(sessionId, userData)
-            
+            presenterScope.launch { chatDataManager?.addChatData(sessionId, userData) }
+
             this.generateListener?.onGenerateStart()
             additionalListeners.forEach { it.onGenerateStart() }
             

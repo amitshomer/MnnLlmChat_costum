@@ -169,6 +169,11 @@ class ChatActivity : AppCompatActivity() {
         setupChatListComponent()
         setupInputModule()
         binding.modelSwitcher.text = modelName
+
+        // "Back to Camera" button: visible for visual models, hidden otherwise
+        val isVisualModel = ModelTypeUtils.isVisualModel(modelId) && !isDiffusion
+        binding.btnBackToCamera.visibility = if (isVisualModel) View.VISIBLE else View.GONE
+        binding.btnBackToCamera.setOnClickListener { handleLookieCameraClick() }
     }
 
     private fun onSessionCreated() {
@@ -488,6 +493,12 @@ class ChatActivity : AppCompatActivity() {
             if (isApiServiceEnabled(this)) {
                 ApiServiceManager.startApiService(this, modelId)
             }
+            // Auto-launch Lookie for visual models (only if not already on the back stack)
+            if (ModelTypeUtils.isVisualModel(modelId ?: "") && !isDiffusion) {
+                if (supportFragmentManager.findFragmentByTag(LookieVideoFragment.TAG) == null) {
+                    handleLookieCameraClick()
+                }
+            }
         }
     }
 
@@ -514,9 +525,8 @@ class ChatActivity : AppCompatActivity() {
         menu.findItem(R.id.menu_item_benchmark_test).isVisible = benchmarkModule.enabled
         // Voice chat is only available for non-diffusion models
         menu.findItem(R.id.start_voice_chat).isVisible = !isDiffusion
-        // Lookie camera is only available for visual models
-        menu.findItem(R.id.start_lookie_camera).isVisible =
-            !isDiffusion && ModelTypeUtils.isVisualModel(modelId ?: "")
+        // Lookie camera overflow entry hidden for visual models (btn_back_to_camera is used instead)
+        menu.findItem(R.id.start_lookie_camera).isVisible = false
         // Real-time audio playback is only available for Omni models
         val isOmniModel = ModelTypeUtils.isOmni(modelName)
         menu.findItem(R.id.realtime_audio_playback).isVisible = false

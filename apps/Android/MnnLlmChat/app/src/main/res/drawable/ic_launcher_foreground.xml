@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Launcher foreground: photo camera + AI sparkle stars
+  Canvas: 108x108dp  (safe zone: 18dp inset on each side → 72x72dp usable)
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- ── Camera body ── -->
+    <!-- Viewfinder bump on top -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M44,32 L44,29 C44,27.9 44.9,27 46,27 L62,27 C63.1,27 64,27.9 64,29 L64,32 Z"/>
+    <!-- Main body rounded rect -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M22,32 C19.8,32 18,33.8 18,36 L18,72 C18,74.2 19.8,76 22,76
+                          L86,76 C88.2,76 90,74.2 90,72 L90,36 C90,33.8 88.2,32 86,32 Z"/>
+
+    <!-- ── Lens (hole cut out of body) ── -->
+    <!-- Outer lens ring in background color -->
+    <path
+        android:fillColor="#1A1F3C"
+        android:pathData="M54,54 m-18,0 a18,18 0 1,0 36,0 a18,18 0 1,0 -36,0"/>
+    <!-- Middle ring white -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,54 m-13,0 a13,13 0 1,0 26,0 a13,13 0 1,0 -26,0"/>
+    <!-- Inner iris in background color -->
+    <path
+        android:fillColor="#1A1F3C"
+        android:pathData="M54,54 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0"/>
+    <!-- Lens highlight dot -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M59,49 m-2,0 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0"/>
+
+    <!-- ── AI sparkle stars (top-right area of camera body) ── -->
+    <!-- Large 4-point star -->
+    <path
+        android:fillColor="#7EB8FF"
+        android:pathData="M80,38 L81.6,42.4 L86,44 L81.6,45.6 L80,50 L78.4,45.6 L74,44 L78.4,42.4 Z"/>
+    <!-- Small 4-point star -->
+    <path
+        android:fillColor="#7EB8FF"
+        android:pathData="M87,33 L87.9,35.1 L90,36 L87.9,36.9 L87,39 L86.1,36.9 L84,36 L86.1,35.1 Z"/>
+    <!-- Tiny dot star -->
+    <path
+        android:fillColor="#7EB8FF"
+        android:pathData="M74,33 m-1.5,0 a1.5,1.5 0 1,0 3,0 a1.5,1.5 0 1,0 -3,0"/>
+
+</vector>

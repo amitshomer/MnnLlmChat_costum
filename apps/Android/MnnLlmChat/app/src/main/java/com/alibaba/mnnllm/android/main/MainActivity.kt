@@ -468,6 +468,11 @@ class MainActivity : AppCompatActivity(), MainFragmentManager.FragmentLifecycleL
         handleIntentExtras(intent)
 
         AnalyticsTracker.logAppOpen(this)
+
+        // Auto-launch if a default visual model is installed (only on fresh start)
+        if (savedInstanceState == null) {
+            tryAutoLaunchDefaultVisualModel()
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -599,6 +604,37 @@ class MainActivity : AppCompatActivity(), MainFragmentManager.FragmentLifecycleL
         dialog.show(supportFragmentManager, PrivacyPolicyDialogFragment.TAG)
     }
     
+    /**
+     * Scans /data/local/tmp/mnn_models/ for a visual model and auto-launches ChatActivity with it.
+     * Prefers SmolVLM2/SV2 models. No-op if no visual model is found.
+     */
+    private fun tryAutoLaunchDefaultVisualModel() {
+        val mnnModelsDir = java.io.File("/data/local/tmp/mnn_models")
+        if (!mnnModelsDir.exists() || !mnnModelsDir.isDirectory) return
+
+        val candidate = mnnModelsDir.listFiles()
+            ?.filter { dir ->
+                dir.isDirectory &&
+                java.io.File(dir, "config.json").exists() &&
+                java.io.File(dir, "llm_config.json").let { f ->
+                    f.exists() && try {
+                        org.json.JSONObject(f.readText()).optBoolean("is_visual", false)
+                    } catch (_: Exception) { false }
+                }
+            }
+            ?.sortedByDescending { dir ->
+                when {
+                    dir.name.contains("SmolVLM", ignoreCase = true) -> 2
+                    dir.name.contains("SV2", ignoreCase = true) -> 2
+                    else -> 1
+                }
+            }
+            ?.firstOrNull() ?: return
+
+        val modelId = "local/${candidate.absolutePath}"
+        ChatRouter.startRun(this, modelId, null, null)
+    }
+
     companion object {
         const val TAG: String = "MainActivity"
         const val EXTRA_SELECT_TAB = "com.alibaba.mnnllm.android.select_tab"

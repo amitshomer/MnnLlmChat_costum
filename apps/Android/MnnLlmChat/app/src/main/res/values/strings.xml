@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MNN Chat Custom</string>
+    <string name="app_name">AI-Tips</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -270,11 +270,14 @@
     <string name="start_voice_chat">Start Voice Chat</string>
     <string name="start_lookie_camera">Lookie Camera</string>
     <string name="lookie_ai_tips_button">✦AI-Tips</string>
-    <string name="lookie_stop_button">■ Stop</string>
+    <string name="lookie_stop_button">Thinking…</string>
     <string name="lookie_ttft_elapsed">⏱ %.1fs</string>
     <string name="lookie_ttft_final">TTFT %.1fs</string>
+    <string name="lookie_model_time">model %.1fs</string>
     <string name="lookie_no_photos">No photos captured yet</string>
     <string name="lookie_warming_up">Warming up…</string>
+    <string name="return_to_lookie">Camera</string>
+    <string name="back_to_camera">Back to Camera</string>
     <string name="max_new_tokens">Max New Tokens</string>
     <string name="system_prompt">System Prompt</string>
     
@@ -681,4 +684,21 @@
     <string name="save_image">Save Image</string>
     <string name="image_saved_to_gallery">Image saved to gallery</string>
     <string name="failed_to_save_image">Failed to save image</string>
+
+    <!-- Vision Accuracy Test -->
+    <string name="vision_test_title">Vision Accuracy Test</string>
+    <string name="vision_test_desc">CAPTURE / IMPROVE classification on testset</string>
+    <string name="vision_test_testset_path">Testset: Android/data/com.alibaba.mnnllm.android/files/testset_all/</string>
+    <string name="start_vision_test">Run Vision Test</string>
+    <string name="stop_vision_test">Stop</string>
+    <string name="vision_test_loading">Loading model…</string>
+    <string name="vision_test_running">Image %1$d / %2$d</string>
+    <string name="vision_test_no_testset">Testset not found at /sdcard/testset_all/</string>
+    <string name="vision_test_no_model">Please select a model first</string>
+    <string name="vision_test_failed">Vision test failed. Check logcat for details.</string>
+    <string name="vision_test_results_title">Vision Test Results</string>
+    <string name="vision_overall_accuracy">Overall: %1$d / %2$d (%3$.0f%%)</string>
+    <string name="vision_capture_accuracy">CAPTURE correct: %1$d / %2$d (%3$.0f%%)</string>
+    <string name="vision_improve_accuracy">IMPROVE correct: %1$d / %2$d (%3$.0f%%)</string>
+    <string name="start_vision_quick_test">Quick Test (10)</string>
 </resources>

@@ -115,6 +115,8 @@ class BenchmarkService {
 
     fun getCurrentBackendType(): String = currentBackendType
 
+    fun getSession(): LlmSession? = llmSession
+
     // Create command parameter instances following llm_bench.cpp approach
     private fun getCmdParamsInstances(
         runtimeParams: RuntimeParameters,

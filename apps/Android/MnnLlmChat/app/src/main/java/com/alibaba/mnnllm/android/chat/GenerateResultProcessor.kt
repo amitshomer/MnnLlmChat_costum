@@ -323,7 +323,7 @@ class GenerateResultProcessor {
         return if (thinkingContent.isNotBlank()) thinkingContent else ""
     }
 
-    fun getNormalOutput(): String = normalStringBuilder.toString()
+    fun getNormalOutput(): String = normalStringBuilder.toString().trimStart()
 
     fun getDisplayResult(): String = getThinkingContent() + getNormalOutput()
 }

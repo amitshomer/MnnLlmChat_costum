@@ -291,7 +291,6 @@ class LookieVideoFragment : Fragment(), ChatPresenter.GenerateListener {
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     ImageUtils.compressImageFile(photoFile, maxDimension = 1024)
-                    ImageUtils.padToSquareInPlace(photoFile)
                     chatPresenter.getLlmSession()?.reset()
                     chatPresenter.getLlmSession()?.setKeepHistory(false)
 

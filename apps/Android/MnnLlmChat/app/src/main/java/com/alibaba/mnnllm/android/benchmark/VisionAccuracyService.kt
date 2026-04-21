@@ -142,7 +142,6 @@ class VisionAccuracyService {
             val gt = parseLabel(gtEntry.optString("final", "CAPTURE"))
 
             ImageUtils.compressImageFile(imageFile, maxDimension = 1024)
-            ImageUtils.padToSquareInPlace(imageFile)
 
             val prompt = "<img>${imageFile.absolutePath}</img>$AI_TIPS_PROMPT"
             val output = StringBuilder()

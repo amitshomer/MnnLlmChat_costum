@@ -291,7 +291,6 @@ class ChatPresenter(
             val file = java.io.File(path)
             if (!file.exists()) continue
             com.alibaba.mnnllm.android.utils.ImageUtils.compressImageFile(file, maxDimension = 1024)
-            com.alibaba.mnnllm.android.utils.ImageUtils.padToSquareInPlace(file)
         }
     }
 

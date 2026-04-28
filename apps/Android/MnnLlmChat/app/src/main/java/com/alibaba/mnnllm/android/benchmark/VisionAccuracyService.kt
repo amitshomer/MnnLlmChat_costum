@@ -22,7 +22,6 @@ class VisionAccuracyService {
         // Same prompt as LookieVideoFragment.AI_TIPS_PROMPT
         private const val AI_TIPS_PROMPT =
             "You must output EXACTLY one line.\n" +
-            "Choose one:\n" +
             "CAPTURE\n" +
             "IMPROVE: <short explanation>\n" +
             "Give me very short recommendation how to make image composition better just if needed.\n" +

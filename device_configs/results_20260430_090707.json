@@ -1,0 +1,629 @@
+{
+  "timestamp": "2026-04-30 09:07:07",
+  "model": "local\/\/data\/local\/tmp\/mnn_models\/SV2_2B_26_384_th28_MNN",
+  "total": 103,
+  "correct": 74,
+  "accuracy": 0.7184466,
+  "capture_accuracy": 0.9130435,
+  "improve_accuracy": 0.32352942,
+  "results": [
+    {
+      "filename": "2d83559b-6633-4aa4-9d0d-859762135a16.JPG",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "2eec2c13-369f-437a-84c2-b05d9d913324.JPG",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "4fc39983-d6c5-4593-84d2-2d2e27fee036.JPG",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "B1EAE004-8F5F-4802-A120-4B0946E79E94.JPG",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "E86A5A54-2005-45EC-958C-0C757E9A4ACB.JPG",
+      "gt": "IMPROVE",
+      "pred": "IMPROVE",
+      "raw_output": "IMPROVE: Step right. Lower. Center child. Remove door frame. Reduce clutter."
+    },
+    {
+      "filename": "IMG_0374.jpeg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_0513.jpeg",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_0550.jpeg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_0551.jpeg",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_2704.jpeg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_2708.jpeg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_3563.jpeg",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_3609.jpeg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_3842.jpeg",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_4337.jpeg",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_4801.jpeg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_4851.jpeg",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5009.jpeg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5065.jpeg",
+      "gt": "IMPROVE",
+      "pred": "IMPROVE",
+      "raw_output": "IMPROVE: Step left. Lower camera. Center baby crawling. Reduce empty grass. Keep chair fully in frame."
+    },
+    {
+      "filename": "IMG_5075.jpeg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5077.jpeg",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5209.jpeg",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5243.jpeg",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5245.jpeg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5247.jpeg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5383.jpeg",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5391.jpeg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5399.jpeg",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5502.JPG",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5506.JPG",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5530.jpeg",
+      "gt": "IMPROVE",
+      "pred": "IMPROVE",
+      "raw_output": "IMPROVE: Move closer. Zoom in. Center coffee cup. Reduce background."
+    },
+    {
+      "filename": "IMG_5664.JPG",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5665.JPG",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5728.JPG",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5992.jpeg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_6136.jpeg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_6248.jpeg",
+      "gt": "IMPROVE",
+      "pred": "IMPROVE",
+      "raw_output": "IMPROVE: Move closer, right. Lower camera, dog fills frame, baby fully in shot. Reduce empty couch."
+    },
+    {
+      "filename": "IMG_6249.jpeg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_6251.jpeg",
+      "gt": "IMPROVE",
+      "pred": "IMPROVE",
+      "raw_output": "IMPROVE: Move closer, lower the camera. Center the two dogs. Crop out the chair and most of the foreground."
+    },
+    {
+      "filename": "IMG_6567.jpeg",
+      "gt": "IMPROVE",
+      "pred": "IMPROVE",
+      "raw_output": "IMPROVE: Move closer. Lower camera. Center dog. Reduce empty floor."
+    },
+    {
+      "filename": "IMG_6568.jpeg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_6598.jpeg",
+      "gt": "CAPTURE",
+      "pred": "IMPROVE",
+      "raw_output": "IMPROVE: Move closer. Lower camera. Center baby. Crop out right-side wall and ruler."
+    },
+    {
+      "filename": "IMG_6600.jpeg",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_7059.JPG",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "a5853363-9223-4143-b348-889f863f7111.JPG",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "bf14221d-3594-4e6b-bb0c-2ef66966b34f.JPG",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "e48f16a5-c859-42a2-8e85-30dc64c174f3.JPG",
+      "gt": "CAPTURE",
+      "pred": "IMPROVE",
+      "raw_output": "IMPROVE: Move closer. Center table. Crop out hands. Reduce empty plates."
+    },
+    {
+      "filename": "ed52aea2-4aab-4101-8062-d7ed91781103.JPG",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "1",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "2.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "3.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE: Move closer, shift right, reduce ceiling. Keep all hanging lights fully in frame."
+    },
+    {
+      "filename": "4.jpg",
+      "gt": "CAPTURE",
+      "pred": "IMPROVE",
+      "raw_output": "IMPROVE: Step right. Lower. Center child. Remove pole. Keep light source."
+    },
+    {
+      "filename": "6.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "7.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "8.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "9.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "10.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "11.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "12.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "13.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "14.jpg",
+      "gt": "CAPTURE",
+      "pred": "IMPROVE",
+      "raw_output": "IMPROVE: Move closer, lower the camera. Center the pot. Reduce background."
+    },
+    {
+      "filename": "15.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "16.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "17.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "18.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "20260111_090839.jpg",
+      "gt": "IMPROVE",
+      "pred": "IMPROVE",
+      "raw_output": "IMPROVE: Move closer, shift right. Center plate, crop out TV, potted plant. Keep all food items fully in frame."
+    },
+    {
+      "filename": "20260111_120121.jpg",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "20260111_122945.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "20260111_152248.jpg",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "20260111_152304.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "20260112_121516.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "20260117_161512.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "20260117_164045.jpg",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "20260117_164050.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "20260117_164156.jpg",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "20260118_121938.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "20260118_122233.jpg",
+      "gt": "IMPROVE",
+      "pred": "IMPROVE",
+      "raw_output": "IMPROVE: Step left. Lower camera. Reduce tree left. Center path. Reduce dark foreground."
+    },
+    {
+      "filename": "20260118_144246.jpg",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "20260118_153301.jpg",
+      "gt": "CAPTURE",
+      "pred": "IMPROVE",
+      "raw_output": "IMPROVE: Step left. Lower camera. Center path. Reduce right-side tree. Keep left-standing tree fully in frame."
+    },
+    {
+      "filename": "20260119_113028.jpg",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "20260119_113504.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "20260119_124350.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "20260119_125308.jpg",
+      "gt": "IMPROVE",
+      "pred": "IMPROVE",
+      "raw_output": "IMPROVE: Move closer. Zoom in, fill frame with squirrel. Reduce empty rock. Keep background trees fully in frame."
+    },
+    {
+      "filename": "20260119_131758.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "20260119_142708.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "20260119_142710.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "20260120_132141.jpg",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "20260121_203004.jpg",
+      "gt": "IMPROVE",
+      "pred": "IMPROVE",
+      "raw_output": "IMPROVE: Move closer. Center both glasses and plate. Crop out left-edge bar. Reduce empty dark background."
+    },
+    {
+      "filename": "20260122_095511.jpg",
+      "gt": "IMPROVE",
+      "pred": "IMPROVE",
+      "raw_output": "IMPROVE: Move closer. Center table, crop out legs. Keep all three cups fully in frame."
+    },
+    {
+      "filename": "20260122_100107.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "20260210_131148.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5108.JPG",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5116.JPG",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5130.JPG",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5134.jpg",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5203.JPG",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5250.JPG",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_5363.JPG",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_6265.JPG",
+      "gt": "IMPROVE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_7077.JPG",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_7113.JPG",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_7119.JPG",
+      "gt": "CAPTURE",
+      "pred": "CAPTURE",
+      "raw_output": "CAPTURE"
+    },
+    {
+      "filename": "IMG_8439.JPG",
+      "gt": "CAPTURE",
+      "pred": "IMPROVE",
+      "raw_output": "IMPROVE: Move closer, center the pizza, crop out the white plate and red background."
+    }
+  ]
+}

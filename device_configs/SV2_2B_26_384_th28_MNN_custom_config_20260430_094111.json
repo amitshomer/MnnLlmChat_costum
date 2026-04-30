@@ -1,0 +1,27 @@
+{
+  "backend_type": "cpu",
+  "llm_model": "llm.mnn",
+  "llm_weight": "llm.mnn.weight",
+  "max_new_tokens": 2048,
+  "memory": "low",
+  "minP": 0.05,
+  "mixed_samplers": [
+    "topK",
+    "topP",
+    "minP",
+    "temperature",
+    "penalty"
+  ],
+  "n_gram": 8,
+  "ngram_factor": 1.02,
+  "penalty": 0.13,
+  "precision": "low",
+  "sampler_type": "greedy",
+  "system_prompt": "",
+  "temperature": 0.0,
+  "tfsZ": 1.0,
+  "thread_num": 4,
+  "topK": 20,
+  "topP": 0.95,
+  "typical": 0.95
+}
